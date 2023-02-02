@@ -1,7 +1,7 @@
 # Use the python image version 3.9-slim-bullseye as the base image for this Docker image.
 FROM python:3.9-slim-bullseye
 
-# Set the working directory inside the container to "/vapp".
+# Set the working directory inside the container to "/app".
 WORKDIR /app
 
 # Copy the Pipfile and Pipfile.lock files from the host to the working directory in the container.

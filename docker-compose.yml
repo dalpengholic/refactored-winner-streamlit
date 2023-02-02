@@ -7,7 +7,7 @@ services:
     ports:
       - '8501:8501'
     volumes:
-      - ${PWD}/app.py:/app/app.py
-    command: ["streamlit", "run", "app.py"]
+      - './project:/app/project'
+    command: ["streamlit", "run", "project/app.py"]
 
 

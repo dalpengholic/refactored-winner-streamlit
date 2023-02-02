@@ -11,7 +11,7 @@ COPY Pipfile* ./
 RUN pip install pipenv && pipenv install --system
 
 # Copy the "app.py" file from the host to the working directory in the container.
-COPY app.py .
+#COPY app.py .
 
 # Set the command to run when the container is launched. This will start the Streamlit app using the "app.py" file.
-CMD streamlit run app.py 
+CMD streamlit run project/app.py

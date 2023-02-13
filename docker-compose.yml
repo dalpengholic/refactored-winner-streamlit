@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  visual-app:
+    build: .
+    container_name: visual-app
+    ports:
+      - '8501:8501'
+    volumes:
+      - './project:/app/project'
+    command: ["streamlit", "run", "project/app.py"]
+
+

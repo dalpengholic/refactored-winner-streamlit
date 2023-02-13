@@ -1,0 +1,25 @@
+# Use the python image version 3.9-slim-bullseye as the base image for this Docker image.
+FROM python:3.9-slim-bullseye AS build
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Install pipenv and use it to install the dependencies listed in the Pipfile.lock file.
+RUN pip install pipenv 
+COPY Pipfile* ./
+RUN pipenv install --deploy
+
+
+FROM python:3.9-bullseye AS runtime
+# Copy the "app.py" file from the host to the working directory in the container.
+#COPY app.py .
+
+COPY --from=build /opt/venv /opt/venv
+#ENV PATH="/.venv/bin:$PATH"
+
+WORKDIR /app
+
+ENV PATH="/opt/venv/bin:$PATH"
+# Set the command to run when the container is launched. This will start the Streamlit app using the "app.py" file.
+CMD streamlit run project/app.py
